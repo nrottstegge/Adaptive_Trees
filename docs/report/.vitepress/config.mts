@@ -6,7 +6,10 @@ export default defineConfig({
   base: process.env.BASE || '/',
   appearance: false,
   srcExclude: ['README.md'],
-  head: [['link', { rel: 'icon', href: (process.env.BASE || '/') + 'header_octree.svg' }]],
+  head: [
+    ['link', { rel: 'icon', type: 'image/png', href: (process.env.BASE || '/') + 'favicon.png' }],
+    ['link', { rel: 'apple-touch-icon', href: (process.env.BASE || '/') + 'apple-touch-icon.png' }],
+  ],
   themeConfig: {
     nav: [],
     outline: { level: [2, 3], label: 'Contents' },
