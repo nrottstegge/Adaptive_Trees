@@ -1,0 +1,39 @@
+:root {
+  --vp-font-family-base: 'Charter', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --vp-c-brand-1: #1f4e79;
+  --vp-c-brand-2: #2b6aa3;
+  --vp-c-brand-3: #1f4e79;
+}
+
+.vp-doc {
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+.vp-doc p { text-align: justify; hyphens: auto; }
+
+.vp-doc h1 { font-size: 2rem; line-height: 1.25; letter-spacing: -0.01em; }
+.vp-doc h2 { border-top: none; margin-top: 2.2rem; padding-top: 0; }
+
+.authors { color: var(--vp-c-text-2); margin: 0.2rem 0 1.4rem; font-style: italic; }
+
+.abstract {
+  border-left: 3px solid var(--vp-c-brand-1);
+  padding: 0.2rem 1.1rem;
+  margin: 1.5rem 0;
+  background: var(--vp-c-bg-soft);
+  font-size: 0.97rem;
+}
+.abstract p { margin: 0.6rem 0; }
+
+.keywords { font-size: 0.9rem; color: var(--vp-c-text-2); }
+
+figure.fig { margin: 1.8rem 0; }
+figure.fig figcaption {
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.vp-doc table { display: table; margin: 1.2rem auto; font-size: 0.95rem; }
+.vp-doc .references li { font-size: 0.93rem; line-height: 1.55; margin: 0.4rem 0; }

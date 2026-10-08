@@ -1,0 +1,86 @@
+name: Deploy slides and report to GitHub Pages
+
+# Publishes
+#   https://<user>.github.io/<repo>/          landing page (docs/index.html)
+#   https://<user>.github.io/<repo>/slides/   Slidev deck  (docs/slides)
+#   https://<user>.github.io/<repo>/report/   report       (docs/report, VitePress)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SITE_BASE: /${{ github.event.repository.name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            docs/slides/package-lock.json
+            docs/report/package-lock.json
+
+      - name: Build slides
+        working-directory: docs/slides
+        run: |
+          npm ci
+          npm run build -- --base "$SITE_BASE/slides/"
+
+      - name: Build report
+        working-directory: docs/report
+        env:
+          BASE: ${{ env.SITE_BASE }}/report/
+        run: |
+          npm ci
+          npm run build
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp docs/index.html _site/index.html
+          cp -r docs/slides/dist _site/slides
+          cp -r docs/report/.vitepress/dist _site/report
+          touch _site/.nojekyll
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,112 @@
+/* Styles for the interactive figures (ported from the Slidev deck).
+   The article typography itself comes from custom.css (template). */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  /* FZJ corporate colours */
+  --fzj-blue: #023d6b;
+  --fzj-lightblue: #adbde3;
+  --fzj-gray: #ebebeb;
+  --fzj-red: #eb5f73;
+  --fzj-green: #b9d25f;
+  --fzj-yellow: #faeb5a;
+  --fzj-violet: #af82b9;
+  --fzj-orange: #fab45a;
+
+  /* neutral */
+  --c-ink: #0f172a;
+  --c-muted: #64748b;
+  --c-line: #cbd5e1;
+  --c-line-strong: #94a3b8;
+  --c-surface: #ffffff;
+  --c-bg: #ffffff;
+  --c-particle: #1e293b;
+  --c-empty: #e2e8f0;
+  --c-hl: #fcf3a6;
+  --c-accent: #023d6b;
+  --c-up: #0f766e;
+  --c-down: #475569;
+  --c-placeholder: #c026d3;
+  --c-good: #15803d;
+  --c-bad: #b91c1c;
+
+  /* tree configurations */
+  --c-oct-leaf: #7b3fbf;
+  --c-oct-nf: #8b5a2b;
+  --c-kd-leaf: #c62828;
+  --c-dense: #64748b;
+
+  /* runtime phases */
+  --c-update: #1f6fd1;
+  --c-view: #e8871e;
+  --c-total: #111111;
+  --c-fmm: #15803d;
+  --c-lists: #af82b9;
+
+  /* FMM operators */
+  --c-op-up: #0f766e;
+  --c-op-down: #475569;
+  --c-op-far: #15803d;
+  --c-op-near: #78716c;
+  --vp-font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ---------- shared figure vocabulary (same as the slide deck) ---------- */
+.msg {
+  border-left: 4px solid var(--fzj-blue);
+  background: var(--fzj-gray);
+  padding: 0.7rem 1rem; margin: 1rem 0;
+}
+.msg p { margin: 0 !important; }
+.card { border: 1px solid var(--c-line); border-radius: 4px; background: var(--c-surface); padding: 0.7rem 0.9rem; }
+.card h3 { font-size: 0.85rem; font-weight: 700; margin: 0 0 0.3rem 0; }
+.muted { color: var(--c-muted); }
+.small { font-size: 0.85rem; }
+.tiny { font-size: 0.72rem; }
+.mono { font-family: var(--vp-font-family-mono); }
+.illus { font-size: 0.72rem; color: var(--c-muted); font-style: italic; }
+.mt-1 { margin-top: 0.25rem; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--c-line); background: var(--c-surface); color: var(--c-ink); }
+button.pill { cursor: pointer; }
+button.pill.on { font-weight: 700; border-width: 2px; border-color: var(--fzj-blue); color: var(--fzj-blue); }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+table.metrics { font-size: 0.8rem; border-collapse: collapse; width: 100%; }
+table.metrics th, table.metrics td { border-bottom: 1px solid var(--c-line); padding: 3px 8px; text-align: left; }
+.ins { font-family: var(--vp-font-family-mono); color: var(--c-placeholder); font-weight: 700; font-size: 0.7rem; }
+
+/* KPI tiles */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 1.2rem 0; }
+.kpi { border: 1px solid var(--c-line); border-top: 4px solid var(--fzj-blue); padding: 0.7rem 0.9rem; background: var(--c-surface); }
+.kpi .num { font-size: 2rem; font-weight: 700; color: var(--fzj-blue); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi .lab { font-weight: 700; font-size: 0.9rem; }
+.kpi .sub { font-size: 0.72rem; color: var(--c-muted); }
+
+/* two-column text blocks */
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 1rem 0; }
+@media (max-width: 720px) { .cols2 { grid-template-columns: 1fr; } }
+
+/* commit chips used in the prose */
+.commit { font-family: var(--vp-font-family-mono); font-size: 0.78em; padding: 1px 6px; border-radius: 4px; background: var(--vp-c-brand-soft); color: var(--fzj-blue); white-space: nowrap; }
+
+/* interactive controls */
+.ctl { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 0.8rem; color: var(--c-muted); margin: 6px 0; }
+.ctl label { display: inline-flex; gap: 6px; align-items: center; }
+.ctl input[type=range] { accent-color: var(--fzj-blue); }
+.ctl select { border: 1px solid var(--c-line); border-radius: 4px; padding: 1px 6px; color: var(--c-ink); background: var(--c-surface); }
+.btn { border: 1px solid var(--c-line-strong); border-radius: 4px; background: var(--c-surface); padding: 2px 10px; cursor: pointer; font-size: 0.8rem; color: var(--c-ink); }
+.btn:hover { border-color: var(--fzj-blue); color: var(--fzj-blue); }
+.btn.primary { background: var(--fzj-blue); border-color: var(--fzj-blue); color: white; }
+
+/* array chips */
+.arr { display: flex; flex-wrap: wrap; gap: 2px; align-items: center; font-family: var(--vp-font-family-mono); font-size: 0.68rem; }
+.arr .lab { font-weight: 700; margin-right: 6px; min-width: 70px; color: var(--c-ink); font-family: var(--vp-font-family-base); }
+.chip { border: 1px solid var(--c-line-strong); border-radius: 3px; padding: 0 3px; background: var(--c-surface); min-width: 22px; text-align: center; }
+
+/* figures and tables are numbered automatically */
+.vp-doc { counter-reset: figure; }
+.vp-doc figure.fig > figcaption::before { counter-increment: figure; content: "Figure " counter(figure) ". "; font-weight: 700; color: var(--vp-c-text-1); }
+.vp-doc figure.fig > figcaption { text-align: left; }
+.vp-doc figure.fig p { text-align: left; }
+.vp-doc mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+.vp-doc .kpis, .vp-doc .ctl, .vp-doc .arr { line-height: 1.35; }
+.vp-doc figure.fig table { margin: 0; }
