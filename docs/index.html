@@ -4,47 +4,91 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Adaptive Trees on a GPU</title>
-  <meta name="description" content="Slides and report: efficient GPU-aware adaptive tree construction for the Fast Multipole Method (JSC Guest Student Programme 2026).">
+  <meta name="description" content="Report and slides: efficient GPU-aware adaptive tree construction for the Fast Multipole Method (JSC Guest Student Programme 2026).">
   <link rel="icon" href="report/header_octree.svg">
   <style>
-    :root { --ink: #1d1d1f; --muted: #6e6e73; --line: rgba(0,0,0,.08); --blue: #023d6b; --bg: #fff; --card: #f5f5f7; }
+    /* Same look as the report (VitePress default theme + the scientific-article template) */
+    :root {
+      --font: 'Charter', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+      --brand: #1f4e79;
+      --brand-2: #2b6aa3;
+      --text-1: rgba(60, 60, 67);
+      --text-2: rgba(60, 60, 67, 0.78);
+      --divider: #e2e2e3;
+      --bg: #ffffff;
+      --bg-soft: #f6f6f7;
+      --line: #cbd5e1;
+    }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
-    main { max-width: 860px; margin: 0 auto; padding: 72px 16px 48px; }
-    .kicker { color: var(--blue); font-weight: 600; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
-    h1 { font-size: clamp(2rem, 1.3rem + 2.6vw, 2.8rem); line-height: 1.08; letter-spacing: -.028em; margin: .3em 0 .35em; }
-    .sub { color: var(--muted); font-size: 1.1rem; margin: 0 0 .5em; }
-    .meta { color: var(--muted); font-size: .92rem; margin: 0 0 40px; }
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-    a.card { display: block; text-decoration: none; color: inherit; background: var(--card); border-radius: 18px; padding: 24px 24px 22px; transition: transform .1s ease-out, box-shadow .2s ease-out; }
-    a.card:hover { box-shadow: 0 0 0 1px var(--line), 0 12px 32px rgba(0,0,0,.08); }
-    a.card:active { transform: scale(.98); }
-    .card h2 { font-size: 1.35rem; letter-spacing: -.015em; margin: 0 0 .3em; }
-    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
-    .card .go { display: inline-block; margin-top: 14px; color: #0071e3; font-weight: 500; }
-    footer { margin-top: 48px; color: var(--muted); font-size: .85rem; }
-    footer a { color: inherit; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text-1);
+      font-family: var(--font); font-size: 16px; line-height: 24px;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* top bar, like VitePress' VPNav */
+    .nav { height: 64px; border-bottom: 1px solid var(--divider); background: var(--bg); }
+    .nav .inner { max-width: 1440px; height: 100%; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; }
+    .nav a { color: var(--text-1); text-decoration: none; font-weight: 600; font-size: 16px; }
+
+    /* document column, like .VPDoc .content-container */
+    main { max-width: 752px; margin: 0 auto; padding: 48px 24px 96px; font-size: 1.05rem; line-height: 1.75; }
+    h1 { font-size: 2rem; line-height: 1.25; letter-spacing: -0.01em; font-weight: 600; margin: 0 0 0.5rem; color: var(--text-1); }
+    h2 { font-size: 24px; line-height: 32px; letter-spacing: -0.02em; font-weight: 600; margin: 2.2rem 0 0; }
+    p { margin: 16px 0; text-align: justify; hyphens: auto; }
+    a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+    a:hover { color: var(--brand-2); }
+    .authors { color: var(--text-2); margin: 0.2rem 0 1.4rem; font-style: italic; text-align: left; }
+    .authors sup { font-size: 0.7em; }
+
+    .abstract { border-left: 3px solid var(--brand); padding: 0.2rem 1.1rem; margin: 1.5rem 0; background: var(--bg-soft); font-size: 0.97rem; }
+    .abstract p { margin: 0.6rem 0; }
+
+    /* the two entries look like the report's figure frames */
+    .entry {
+      display: block; margin: 1.5rem 0; padding: 14px 16px 12px; border: 1px solid var(--line); border-radius: 6px;
+      background: var(--bg); color: inherit; text-decoration: none; font-weight: 400;
+    }
+    .entry:hover { border-color: var(--brand); color: inherit; }
+    .entry .title { display: block; font-size: 1.25rem; font-weight: 600; color: var(--brand); line-height: 1.4; }
+    .entry .url { display: block; font-size: 0.85rem; color: var(--text-2); font-family: ui-monospace, Menlo, monospace; }
+    .entry .caption { display: block; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 0.9rem; line-height: 1.5; color: var(--text-2); }
+    .entry .caption b { color: var(--text-1); }
+
+    .keywords { font-size: 0.9rem; color: var(--text-2); text-align: left; }
+
+
+    @media (max-width: 640px) { .nav .inner { padding: 0 24px; } main { padding-top: 32px; } h1 { font-size: 1.7rem; } }
   </style>
 </head>
 <body>
+  <header class="nav"><div class="inner"><a href="./">Adaptive Trees on a GPU</a></div></header>
+
   <main>
-    <div class="kicker">Guest Student Programme 2026 · JSC</div>
-    <h1>Adaptive Trees on a GPU</h1>
-    <p class="sub">Efficient GPU-aware adaptive tree construction for the Fast Multipole Method</p>
-    <p class="meta">Nils Rottstegge · Department of Computer Science, ETH Zürich · Jülich Supercomputing Centre, Forschungszentrum Jülich</p>
-    <div class="cards">
-      <a class="card" href="report/">
-        <h2>Report</h2>
-        <p>The full write-up with interactive figures, animations, benchmark results and a 3D tree viewer.</p>
-        <span class="go">Read the report →</span>
-      </a>
-      <a class="card" href="slides/">
-        <h2>Slides</h2>
-        <p>The presentation of the project, with dataset animations and benchmark plots.</p>
-        <span class="go">Open the slides →</span>
-      </a>
+    <h1>Adaptive Trees on a GPU: Efficient GPU-aware Adaptive Tree Construction for the Fast Multipole Method</h1>
+
+    <p class="authors">Nils Rottstegge<sup>1,2</sup><br>
+    <sup>1</sup>Department of Computer Science, ETH Zürich · <sup>2</sup>Jülich Supercomputing Centre (JSC), Forschungszentrum Jülich, Guest Student Programme 2026 (August – October 2026)</p>
+
+    <div class="abstract">
+      <p>This site collects the results of my project in the JSC Guest Student Programme 2026: a GPU implementation of adaptive octrees and binary trees for the Fast Multipole Method, built on the Cornerstone representation. The report describes the methods, the GPU optimisations and the benchmark results in detail, and the slides summarise the project as presented at JSC.</p>
     </div>
-    <footer>Source code: <a href="https://github.com/nrottstegge/Adaptive_Trees">github.com/nrottstegge/Adaptive_Trees</a></footer>
+
+    <a class="entry" href="report/">
+      <span class="title">Report</span>
+      <span class="url">report/</span>
+      <span class="caption"><b>Interactive article.</b> Background, the adaptive tree update and the NFCount criterion, the TreeView construction, all GPU optimisations, the binary tree and the results, with interactive figures, dataset animations and a 3D tree viewer.</span>
+    </a>
+
+    <a class="entry" href="slides/">
+      <span class="title">Slides</span>
+      <span class="url">slides/</span>
+      <span class="caption"><b>Presentation.</b> The talk given at the end of the programme, with dataset animations, benchmark plots and the interactive viewer. Use the arrow keys to navigate.</span>
+    </a>
+
+    <p class="keywords"><b>Source code:</b> <a href="https://github.com/nrottstegge/Adaptive_Trees">github.com/nrottstegge/Adaptive_Trees</a></p>
   </main>
+
 </body>
 </html>
