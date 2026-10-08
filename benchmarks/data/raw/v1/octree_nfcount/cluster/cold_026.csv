@@ -1,0 +1,2 @@
+version,commit,path,config,dataset,process_rep,initial_build_ms,initial_tree_gpu_ms,initial_view_gpu_ms,num_leaves,num_nodes,max_depth
+v1,e7bd16a8ad2be3cb1a245ce7fe4d8ea167164025,direct,octree_nfcount,cluster,26,3.481524,2.078239918,1.394783974,939,1073,10

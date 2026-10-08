@@ -1,0 +1,3 @@
+version,commit,path,config,dataset,run,snapshot,frame_id,tree_update_ms,view_ms,total_ms,wall_ms,attempts,maintenance_ms,iterations,num_nodes,num_leaves,max_depth,max_depth_octree_equiv,num_empty_leaves,empty_leaf_pct,avg_particles_per_leaf,particles_active,particles_escaped,particle_slots,lib_num_nodes
+v3,d830fc32ff2631e4e1344dc30b3e09c3b9690bed,graph,octree_nfcount,dense_halo,6,0,0,nan,nan,nan,nan,0,0,-1,1773729,1552013,12,12,49704,3.202550494,16.4947072,25600000,0,25600000,1773729
+v3,d830fc32ff2631e4e1344dc30b3e09c3b9690bed,graph,octree_nfcount,dense_halo,6,1,1,32.86336136,7.798783779,40.67139053,40.690462,1,0,-1,1762721,1542381,11,11,38137,2.472605666,16.59771483,25600000,0,25600000,1762721

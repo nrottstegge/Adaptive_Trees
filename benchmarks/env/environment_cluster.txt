@@ -1,0 +1,17 @@
+date: 2026-10-02T11:08:09+02:00
+host: zam798
+gpu: NVIDIA GeForce RTX 5060, 615.71.09
+nvcc: Cuda compilation tools, release 13.3, V13.3.73 Build cuda_13.3.r13.3/compiler.38244171_0 
+host compiler: g++ (Debian 14.2.0-19) 14.2.0
+cmake: cmake version 3.31.6
+cpu: Intel(R) Core(TM) Ultra 7 265K
+os: Debian GNU/Linux 13 (trixie), kernel 6.12.107+deb13-amd64
+python: Python 3.13.5
+cuda arch: sm_120
+cmake flags: -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CUDA_COMPILER=nvcc -DCMAKE_CUDA_HOST_COMPILER=g++ -DCMAKE_CUDA_ARCHITECTURES=120 -DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG -DCMAKE_CUDA_FLAGS_RELEASE=-O3 -DNDEBUG -lineinfo -DCMAKE_CUDA_FLAGS=--extended-lambda -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+pinning: taskset -c 4; CUDA_MODULE_LOADING=EAGER
+protocol: W=3 R_MIN=10 R_MAX=50 CI_TOL=0.05 COLD_REPS=30 stride=1 noisy=1 sigma=1e-3 seed=20261001 boot_seed=12345
+commit cstone: d7fddfb4f8d8ada0eb1a65d1a450a66c8cbd794c
+commit v1: e7bd16a8ad2be3cb1a245ce7fe4d8ea167164025
+commit v2: ea89b79a9dfd35df20fed759e6d15c60fe01e77c
+commit v3: d830fc32ff2631e4e1344dc30b3e09c3b9690bed

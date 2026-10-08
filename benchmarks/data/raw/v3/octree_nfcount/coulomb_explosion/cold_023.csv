@@ -1,0 +1,2 @@
+version,commit,path,config,dataset,process_rep,initial_build_ms,initial_tree_gpu_ms,initial_view_gpu_ms,num_leaves,num_nodes,max_depth
+v3,d830fc32ff2631e4e1344dc30b3e09c3b9690bed,graph,octree_nfcount,coulomb_explosion,23,1.701103,1.420287967,0.2707520127,7421,8481,14

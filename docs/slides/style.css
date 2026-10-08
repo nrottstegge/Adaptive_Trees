@@ -1,0 +1,165 @@
+:root {
+  /* FZJ corporate colours (beamercolorthemeJuelich.sty) */
+  --fzj-blue: #023d6b;
+  --fzj-lightblue: #adbde3;
+  --fzj-gray: #ebebeb;
+  --fzj-red: #eb5f73;
+  --fzj-green: #b9d25f;
+  --fzj-yellow: #faeb5a;
+  --fzj-violet: #af82b9;
+  --fzj-orange: #fab45a;
+
+  /* neutral */
+  --c-ink: #0f172a;
+  --c-muted: #64748b;
+  --c-line: #cbd5e1;
+  --c-line-strong: #94a3b8;
+  --c-surface: #ffffff;
+  --c-bg: #ffffff;
+  --c-particle: #1e293b;
+  --c-empty: #e2e8f0;
+  --c-hl: #fcf3a6;
+  --c-bad: #334155;
+  --c-accent: #023d6b;        /* generic diagram accent = fzjblue */
+  --c-up: #0f766e;
+  --c-down: #475569;
+  --c-placeholder: #c026d3;   /* placeholder marker only */
+
+  /* tree configurations (results) */
+  --c-oct-leaf: #7b3fbf;      /* Octree / LeafCount  = purple */
+  --c-oct-nf: #8b5a2b;        /* Octree / NFCount    = brown  */
+  --c-kd-leaf: #c62828;       /* KDTree3D / LeafCount = red   */
+  --c-dense: #64748b;         /* dense (uniform) tree reference = slate */
+
+  /* runtime phases */
+  --c-update: #1f6fd1;        /* tree update         = blue   */
+  --c-view: #e8871e;          /* view construction   = orange */
+  --c-total: #111111;         /* total runtime       = black  */
+
+  /* FMM operators / FMM phases (distinct from config + tree-phase colours) */
+  --c-op-up: #0f766e;         /* P2M, M2M  (upward)   */
+  --c-op-down: #475569;       /* L2L, L2P  (downward) */
+  --c-op-far: #15803d;        /* M2L       (far field) */
+  --c-op-near: #78716c;       /* P2P       (near field) */
+}
+
+.slidev-layout {
+  background: var(--c-bg);
+  color: var(--c-ink);
+}
+
+/* ---------- FZJ frame (layouts/default.vue) ---------- */
+.slidev-layout.fzj-frame { padding: 31px 31px 0 31px; position: relative; height: 100%; }
+.fzj-body { display: flex; flex-direction: column; height: calc(100% - 80px); }
+.fzj-body > * { flex: none; }
+.fzj-body > h1, .fzj-body > p:has(> h1) { order: -2; }
+.fzj-body > .kicker { order: -1; }
+
+.slidev-layout h1 {
+  font-weight: 700; text-transform: uppercase; color: var(--fzj-blue);
+  font-size: 29px; line-height: 1.15; letter-spacing: 0; margin: 0 0 2px 0;
+}
+.slidev-layout h1 + p { opacity: 1; }
+.slidev-layout h2 { font-weight: 600; color: var(--fzj-blue); }
+.slidev-layout p, .slidev-layout li { line-height: 1.5; }
+
+/* frame subtitle (former kicker) */
+.kicker { font-size: 0.86rem; color: var(--fzj-blue); font-weight: 700; margin: 0 0 0.5rem 0; letter-spacing: 0; text-transform: none; }
+
+/* square bullets, as in beamerinnerthemeJuelich */
+.slidev-layout ul { list-style: none; padding-left: 1.1em; }
+.slidev-layout ul > li { position: relative; }
+.slidev-layout ul > li::before {
+  content: ''; position: absolute; left: -0.95em; top: 0.55em; width: 0.42em; height: 0.42em; background: var(--fzj-blue);
+}
+.slidev-layout ol > li::marker { color: var(--fzj-blue); font-weight: 700; }
+
+/* callout = FZJ block body */
+.msg {
+  border-left: 4px solid var(--fzj-blue);
+  background: var(--fzj-gray);
+  padding: 0.55rem 1rem; border-radius: 0; font-size: 0.95rem;
+}
+.msg p { margin: 0 !important; }
+
+/* ---------- title & section pages ---------- */
+.slidev-layout.fzj-title { padding: 0; position: relative; height: 100%; background: white; }
+.fzj-title .band { position: absolute; left: 31px; right: 31px; top: 31px; height: 278px; overflow: hidden; background: var(--fzj-lightblue); }
+.fzj-title .bar { position: absolute; left: 0; right: 0; top: 309px; height: 180px; background: var(--fzj-blue); color: white; padding: 26px 31px 0 31px; }
+.fzj-title .t { font-size: 36px; font-weight: 700; line-height: 1.12; text-transform: uppercase; }
+.fzj-title .st { font-size: 22px; font-weight: 700; line-height: 1.2; color: var(--fzj-lightblue); margin-top: 4px; }
+.fzj-title .info { font-size: 16px; margin-top: 18px; display: flex; align-items: center; }
+.fzj-title .info i { display: inline-block; width: 1px; height: 1em; background: white; margin: 0 0.6em; }
+.fzj-section .t { margin-top: 18px; }
+
+.card { border: 1px solid var(--c-line); border-radius: 4px; background: var(--c-surface); padding: 0.7rem 0.9rem; }
+.card h3 { font-size: 0.85rem; font-weight: 700; margin: 0 0 0.3rem 0; }
+.muted { color: var(--c-muted); }
+.small { font-size: 0.78rem; }
+.tiny { font-size: 0.66rem; }
+.mono { font-family: var(--slidev-code-font-family, monospace); }
+.illus { font-size: 0.62rem; color: var(--c-muted); font-style: italic; }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--c-line); background: var(--c-surface); }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+
+.slidev-layout ul { margin-top: 0.2rem; }
+.slidev-layout li { margin: 0.15rem 0; }
+.slidev-code { font-size: 0.72rem !important; }
+
+table.metrics { font-size: 0.72rem; border-collapse: collapse; width: 100%; }
+table.metrics th, table.metrics td { border-bottom: 1px solid var(--c-line); padding: 3px 8px; text-align: left; }
+table.metrics th { font-weight: 700; }
+.ins { font-family: var(--slidev-code-font-family, monospace); color: var(--c-placeholder); font-weight: 700; font-size: 0.66rem; }
+
+.slidev-layout td, .slidev-layout th { padding: 0.22rem 0.7rem; }
+
+/* TreeView vs Cornerstone output table */
+table.outcmp { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-top: 4px; }
+table.outcmp th { text-align: left; font-weight: 700; padding: 4px 8px; border-bottom: 2px solid var(--fzj-blue); }
+table.outcmp th.ours { color: var(--fzj-blue); }
+table.outcmp th.cs { color: var(--c-muted); }
+table.outcmp td { padding: 5px 8px; border-bottom: 1px solid var(--c-line); vertical-align: top; }
+table.outcmp td.cat { font-weight: 700; color: var(--c-ink); white-space: nowrap; width: 150px; }
+table.outcmp td.no { color: var(--c-muted); }
+table.outcmp code { font-size: 0.78rem; background: var(--fzj-gray); padding: 0 4px; border-radius: 2px; }
+table.outcmp .note { color: var(--c-muted); font-size: 0.72rem; }
+table.outcmp tr.hl td { background: color-mix(in srgb, var(--fzj-lightblue) 22%, transparent); }
+table.outcmp .tag { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 0 4px; border-radius: 2px; color: white; vertical-align: 1px; }
+table.outcmp .tag.u { background: var(--c-update); }
+table.outcmp .tag.b { background: var(--c-view); }
+table.fp td.fast { color: var(--fzj-blue); font-weight: 700; }
+table.fp td.slow { color: var(--c-kd-leaf); font-weight: 700; }
+
+/* ---------- fzj-content: centre the slide body vertically below the title ---------- */
+/* (slides with a ::center:: slot keep the template behaviour) */
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto > h1:first-child,
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto > h1:first-child + h2 {
+  flex: none;
+}
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto > h1:first-child + h2 + *,
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto > h1:first-child + :not(h2) {
+  margin-top: auto !important;
+}
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto > h1:first-child:not(:has(+ h2)),
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto > h1:first-child + h2 {
+  margin-bottom: 1.2rem !important;
+}
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto::after {
+  content: '';
+  margin-top: auto;
+}
+/* everything between title and the end keeps its natural size */
+.layout-wrapper .content:not(:has(> .body.center)) > .body.auto > * { flex-shrink: 0; }
+/* keep the (absolutely positioned) reference line clear of the centred content */
+.layout-wrapper .content > .body.auto:has(.slide-refs) { padding-bottom: 30px; }
+
+/* Takeaways: headline numbers */
+.card.kpi { border-left: 5px solid var(--fzj-blue); display: flex; flex-direction: column; gap: 2px; }
+.card.kpi .kpi-num { font-size: 2.4rem; font-weight: 800; color: var(--fzj-blue); line-height: 1; }

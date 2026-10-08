@@ -1,0 +1,3 @@
+dataset,snapshot,frame_id,v3_leaves,cstone_leaves,leaf_arrays_identical,cstone_iterations,particles_active,v3_overfull_leaves,v3_mergeable_groups,cstone_overfull_leaves,cstone_mergeable_groups
+nacl,0,0,512,512,1,2,6740,0,0,0,0
+nacl,1,1,512,512,1,2,6740,0,0,0,0

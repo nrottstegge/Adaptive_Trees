@@ -1,0 +1,2 @@
+name, uuid, pci.bus_id, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB], clocks.current.graphics [MHz], clocks.current.sm [MHz], clocks.current.memory [MHz], clocks.max.graphics [MHz], clocks.max.memory [MHz], temperature.gpu, power.draw [W], pstate, persistence_mode
+NVIDIA GeForce RTX 5060, GPU-76204b4c-3f74-6a00-f6a9-3efcc598e5bf, 00000000:02:00.0, 615.71.09, 8151 MiB, 0 MiB, 7800 MiB, 2520 MHz, 2520 MHz, 14001 MHz, 3090 MHz, 14001 MHz, 38, 27.69 W, P0, Disabled

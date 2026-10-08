@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.DS_Storenode_modules/
+dist/
+.DS_Store
+
+# Development/template copies
+_fzj_template/
+gpu-adaptive-trees-fmm/

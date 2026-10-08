@@ -1,0 +1,3 @@
+dataset,snapshot,frame_id,v3_leaves,cstone_leaves,leaf_arrays_identical,cstone_iterations,particles_active,v3_overfull_leaves,v3_mergeable_groups,cstone_overfull_leaves,cstone_mergeable_groups
+stmv,0,0,31536,31536,1,3,1066628,0,0,0,0
+stmv,1,1,31536,31536,1,3,1066628,0,0,0,0

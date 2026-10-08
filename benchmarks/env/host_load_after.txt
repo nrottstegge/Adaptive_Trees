@@ -1,0 +1,21 @@
+ 18:39:41 up 15 days,  1:37,  4 users,  load average: 2.00, 1.68, 1.32
+
+rottstegge1 sshd         2026-10-01 18:35 (194.230.144.114)
+rottstegge1 seat0        2026-09-16 17:02
+rottstegge1 tty1         2026-09-16 17:02
+
+    PID USER     %CPU COMMAND
+ 998863 rottste+ 63.8 cpptools
+ 998640 rottste+  4.9 MainThread
+ 998952 rottste+  3.0 cpptools-srv
+ 881336 rottste+  2.6 cpptools
+ 998652 rottste+  0.9 MainThread
+ 881081 rottste+  0.8 MainThread
+ 888359 root      0.8 nessus-agent-mo
+ 999092 rottste+  0.6 cpptools-srv2
+ 998988 rottste+  0.5 cpptools-srv2
+ 998587 rottste+  0.5 code-7debcd0e2a
+   1003 avahi     0.3 avahi-daemon
+ 999366 rottste+  0.2 codex
+ 998557 rottste+  0.2 sshd-session
+   1438 root      0.2 cups-browsed
