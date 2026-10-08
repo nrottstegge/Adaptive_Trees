@@ -1,0 +1,3 @@
+/home/rottstegge1/Documents/GSP/adaptive-octree/tests/build/CMakeFiles/adaptive_octree_test.dir
+/home/rottstegge1/Documents/GSP/adaptive-octree/tests/build/CMakeFiles/edit_cache.dir
+/home/rottstegge1/Documents/GSP/adaptive-octree/tests/build/CMakeFiles/rebuild_cache.dir
